@@ -1,0 +1,36 @@
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "LambdaOrchestration",
+			"Effect": "Allow",
+			"Action": [
+				"lambda:InvokeFunction",
+				"lambda:GetFunction"
+			],
+			"Resource": [
+				"arn:aws:lambda:ap-south-1:700951986601:function:yt-data-pipeline-*"
+			]
+		},
+		{
+			"Sid": "GlueJobOrchestration",
+			"Effect": "Allow",
+			"Action": [
+				"glue:StartJobRun",
+				"glue:GetJobRun",
+				"glue:GetJobRuns",
+				"glue:GetJob",
+				"glue:BatchStopJobRun"
+			],
+			"Resource": "*"
+		},
+		{
+			"Sid": "SNSPipelineAlerts",
+			"Effect": "Allow",
+			"Action": [
+				"sns:Publish"
+			],
+			"Resource": "arn:aws:sns:ap-south-1:700951986601:yt-data-pipeline-alerts-dev"
+		}
+	]
+}

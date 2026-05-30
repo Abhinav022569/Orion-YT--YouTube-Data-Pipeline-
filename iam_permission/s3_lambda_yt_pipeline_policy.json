@@ -1,0 +1,74 @@
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "S3BucketLevelActions",
+			"Effect": "Allow",
+			"Action": [
+				"s3:ListBucket",
+				"s3:GetBucketLocation"
+			],
+			"Resource": [
+				"arn:aws:s3:::yt-data-pipeline-bronze-ap-south-1-demo",
+				"arn:aws:s3:::yt-data-pipeline-silver-ap-south-1-demo"
+			]
+		},
+		{
+			"Sid": "S3ObjectLevelActions",
+			"Effect": "Allow",
+			"Action": [
+				"s3:GetObject",
+				"s3:PutObject",
+				"s3:DeleteObject"
+			],
+			"Resource": [
+				"arn:aws:s3:::yt-data-pipeline-bronze-ap-south-1-demo/*",
+				"arn:aws:s3:::yt-data-pipeline-silver-ap-south-1-demo/*"
+			]
+		},
+		{
+			"Sid": "GlueDataCatalogAccess",
+			"Effect": "Allow",
+			"Action": [
+				"glue:GetDatabase",
+				"glue:GetTable",
+				"glue:CreateTable",
+				"glue:UpdateTable",
+				"glue:GetPartitions",
+				"glue:CreatePartition",
+				"glue:BatchCreatePartition"
+			],
+			"Resource": "*"
+		},
+		{
+			"Sid": "SNSAlertingAccess",
+			"Effect": "Allow",
+			"Action": [
+				"sns:Publish"
+			],
+			"Resource": "arn:aws:sns:ap-south-1:700951986601:yt-data-pipeline-alerts-dev"
+		},
+		{
+			"Sid": "AthenaQueryExecutionAccess",
+			"Effect": "Allow",
+			"Action": [
+				"athena:StartQueryExecution",
+				"athena:GetQueryExecution",
+				"athena:GetQueryResults",
+				"athena:GetWorkGroup",
+				"athena:GetDataCatalog"
+			],
+			"Resource": "*"
+		},
+		{
+			"Sid": "CloudWatchLogging",
+			"Effect": "Allow",
+			"Action": [
+				"logs:CreateLogGroup",
+				"logs:CreateLogStream",
+				"logs:PutLogEvents"
+			],
+			"Resource": "arn:aws:logs:*:*:*"
+		}
+	]
+}
